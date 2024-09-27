@@ -156,7 +156,7 @@
                 <tr>
                     <th>Sr no</th>
                     <th>Name</th>
-                    <th>Phone Number</th>
+                    <th>Phone Number</th>   
                     <th>Email</th>
                     <th>Gender</th>
                     <th>Role</th>
