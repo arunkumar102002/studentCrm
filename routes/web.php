@@ -1,6 +1,10 @@
 <?php
 
+use App\Http\Controllers\jqueryController;
+
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\feesController;
+use App\Http\Controllers\FeesPayController;
 use App\Http\Controllers\SubjectController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\userController;
@@ -38,6 +42,21 @@ Route::middleware(['auth', adminMiddleware::class])->group(function () {
 
 
 
+Route::get('/fees/managment', [feesController::class, 'feesdatashow'])->name('fees.managment');
+Route::post('/fees/store', [feesController::class, 'feesStore'])->name('fees.store');
+Route::POST('/save-amount', [feesController::class, 'saveAmount'])->name('save.fees.amount');
+
+
+Route::get('/fees-dashboard', [FeesPayController::class, 'FeesDashboard'])->name('fees.dashboard');
+Route::get('/fees-payment', [FeesPayController::class, 'FeesIndex'])->name('User.fees.index');
+Route::post('/fees/store', [FeesPayController::class, 'UserFeesStore'])->name('User.fees.fee.store');
+Route::get('/fees-data-show', [FeesPayController::class, 'FeesDataShow'])->name('fees.data.show');
+
+
+
+
+
+
 
 
 Route::resource('subject', SubjectController::class)->middleware(['auth'])->names([
@@ -64,9 +83,7 @@ Route::resource('course', CourseController::class)->middleware(['auth'])->names(
 
 
 
-
-
-
+Route::get('/jquery',[jqueryController::class, 'jquery'])->name('jquery');
 
 
 

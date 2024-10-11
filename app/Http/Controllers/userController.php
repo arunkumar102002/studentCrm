@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Course;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;    
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Support\Facades\Crypt;
@@ -49,7 +49,7 @@ class UserController extends Controller
             // Email doesn't exist, show the error message
             return redirect()->back()->withErrors(['email' => 'Email not found'])->withInput();
         }
-    }
+    }   
 
 
 
@@ -85,7 +85,7 @@ class UserController extends Controller
             'name' => 'required|string',
             'father_name' => 'required|string',
             'address' => 'required|string',
-            'phon_number' => 'required|digits_between:10,12',
+            'phon_number' => 'required|min:10',
             'dob' => 'required|date',
             'gender' => 'required|string|in:Male,Female,Other',
             'email' => 'required|email|unique:users,email,' . $request->id,

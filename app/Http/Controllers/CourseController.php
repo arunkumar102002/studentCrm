@@ -10,15 +10,21 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
+
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $courses = Course::with('subjects')->get();
+        $courses = Course::with(['subjects', 'fees'])->get();
         $subjects = Subject::all();
+
+        //dd($courses->toArray());
         return view('courses.index', compact(['courses', 'subjects']));
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -28,34 +34,42 @@ class CourseController extends Controller
         //
     }
 
+
+
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-
-        $validatedata = Validator::make(request()->all(), [
-            'name' => 'required|unique:courses,name'
+        // Validation for course name and subject
+        $validatedData = Validator::make($request->all(), [
+            'name' => 'required|unique:courses,name', // Ensures unique course name
+            'subjects' => 'required|array|min:1', // Ensures at least one subject is selected
+            'subjects.*' => 'exists:subjects,id'  // Ensures that the subjects exist in the database
         ]);
-        if ($validatedata->fails()) {
-            return back()->withErrors($validatedata)->withInput();
-        } else {
-            if ($request->subject == null) {
-                return redirect()->route('course.index')->with('error', ' coures select minmum one subject');
-            }
-            $courses = new Course;
-            $courses->name = $request->name;
-            $courses->save();
 
-            foreach ($request->subject as $value) {
-                $courseSubject = new CourseSubject();
-                $courseSubject->course_id = $courses->id;
-                $courseSubject->subject_id = $value;
-                $courseSubject->save();
-            }
+        // Check if validation fails
+        if ($validatedData->fails()) {
+            return back()->withErrors($validatedData)->withInput();
         }
-        return redirect()->route('course.index')->with('success', ' coures create successfully');
+
+        // Create the course
+        $course = new Course;
+        $course->name = $request->name;
+        $course->save();
+
+        // Attach subjects to the course using pivot table
+        foreach ($request->subjects as $subjectId) {
+            $courseSubject = new CourseSubject();
+            $courseSubject->course_id = $course->id;
+            $courseSubject->subject_id = $subjectId;
+            $courseSubject->save();
+        }
+
+        // Redirect back with success message
+        return redirect()->route('course.index')->with('success', 'Course created successfully');
     }
+
 
     /**
      * Display the specified resource.
@@ -64,6 +78,7 @@ class CourseController extends Controller
     {
         //
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -76,6 +91,7 @@ class CourseController extends Controller
         return view('courses.edit', compact(['course', 'subjects']));
     }
 
+
     /**
      * Update the specified resource in storage.
      */
@@ -84,7 +100,7 @@ class CourseController extends Controller
 
         $validatedata = validator::make(request()->all(), [
             'name' => 'required',
-            'subject' => 'required|array', 
+            'subject' => 'required|array',
             'subject.*' => 'exists:subjects,id',
         ]);
 
@@ -102,6 +118,7 @@ class CourseController extends Controller
         }
     }
 
+    
     /**
      * Remove the specified resource from storage.
      */

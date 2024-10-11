@@ -18,8 +18,10 @@ class Course extends Model
         return $this->belongsToMany(Subject::class, 'course_subjects', 'course_id', 'subject_id');
     }
 
-
-
+   public function fees()
+    {
+        return $this->hasMany(SemesterFees::class, 'course_id', 'id');
+    }
     /*************  ✨ Codeium Command ⭐  *************/
     /**
      * Get the users that belong to the Course

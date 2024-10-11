@@ -23,7 +23,7 @@
                                 <div class="form-group">
                                     <label for="subjects" class="p-2">Subjects</label>
                                     <select name="subject[]" id="subject" class="mt-2 form-control select2" multiple required>
-                                    
+
                                         @foreach ($subjects as $subject)
                                         <option value="{{ $subject->id }}" @if(in_array($subject->id, $course->subjects->pluck('id')->toArray())) selected @endif>
                                             {{ $subject->name }}

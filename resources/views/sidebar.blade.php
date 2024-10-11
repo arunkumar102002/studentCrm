@@ -31,21 +31,40 @@
     <li class="nav-item">
       <a class="nav-link" href="{{ route('subject.index')}}">
         <svg class="nav-icon">
-          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-pencil"></use>
-        </svg> 
+          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-book"></use>
+        </svg>
         Subjects
       </a>
     </li>
 
-
     <li class="nav-item">
       <a class="nav-link" href="{{ route('course.index')}}">
         <svg class="nav-icon">
-          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-pencil"></use>
-        </svg> 
+          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-library"></use>
+        </svg>
         Courses
       </a>
     </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('fees.managment')}}">
+        <svg class="nav-icon">
+          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-dollar"></use>
+        </svg>
+        Fees Manegment
+      </a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="{{route('fees.dashboard')}}">
+        <svg class="nav-icon">
+          <use xlink:href="node_modules/@coreui/icons/sprites/free.svg#cil-money"></use>
+        </svg>
+        Fees Pay
+      </a>
+    </li>
+
+
+
 
     <li class="nav-title">Components</li>
     <li class="nav-group"><a class="nav-link nav-group-toggle" href="#">

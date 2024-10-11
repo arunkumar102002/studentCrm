@@ -52,7 +52,7 @@
 
                                 <div class="mb-3 col-lg-4 p-2">
                                     <label for="phon_number">Phone Number</label>
-                                    <input class="form-control" type="text" name="phon_number" placeholder="Phone Number" id="phon_number" required>
+                                    <input class="form-control" type="number" name="phon_number" placeholder="Phone Number" id="phon_number" required>
                                     <span class="text-danger"></span>
                                 </div>
 
@@ -156,7 +156,7 @@
                 <tr>
                     <th>Sr no</th>
                     <th>Name</th>
-                    <th>Phone Number</th>   
+                    <th>Phone Number</th>
                     <th>Email</th>
                     <th>Gender</th>
                     <th>Role</th>
@@ -314,10 +314,6 @@
 
 
 
-
-
-
-
             // data stor for update
             $(document).ready(function() {
                 $('#formsubmit').on('submit', function(e) {
@@ -344,9 +340,17 @@
                                     text: `The Student data has been ${id ? 'updated' : 'created'} successfully!`,
                                     icon: "success"
                                 });
-                                userDataShow(); // Refresh the data after successful save
-                                $('#formsubmit')[0].reset(); // Reset the form
-                                $('#submitButton').text('Create Account'); // Adjust button text, or 'Update Account' if needed
+                                userDataShow();
+
+                                // Reset the form, but if it's an update, keep the button as 'Update'
+                                $('#formsubmit')[0].reset(); // Reset form fields
+                                if (!id) {
+                                    $('#submitButton').text('Create Account'); // Only set back to Create Account if it's a new record
+                                } else {
+                                    $('#submitButton').text('Update Account'); // Keep the button text as 'Update' after an update
+                                }
+
+
                             }
                         },
                         error: function(xhr) {
@@ -371,9 +375,9 @@
                 // Function to fetch and display student data on page load
                 userDataShow();
 
-                // Function to handle and display validation errors
+
                 function handleErrors(errors) {
-                    // Clear previous errors
+
                     $('.text-danger').text('');
 
                     // Display new errors
@@ -403,6 +407,10 @@
 
 
 
+
+
+
+
             // Edit button click event
             $(document).on('click', '.edit-btn', function(e) {
                 e.preventDefault();
@@ -414,7 +422,7 @@
                     type: "GET",
                     success: function(response) {
                         let data = response.data;
-                          console.log(data);
+                        console.log(data);
 
                         $('#id').val(data.id);
                         $('#name').val(data.name);
@@ -524,4 +532,5 @@
                 });
             });
         </script>
+
         @endsection
