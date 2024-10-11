@@ -266,82 +266,6 @@
                             });
 
 
-
-
-
-
-
-                            // let selectedsemesteid = null;
-                            // let selectedcourseid = null;
-
-                            // courseSelect.on('change', function() {
-                            //     selectedcourseid = $(this).find(':selected').data('id');
-                            //     // console.log(selectedcourseid);
-
-                            //     let courseSmester = semesters.filter(function(semester) {
-                            //         return semester.course_id == selectedcourseid;
-                            //         console.log(courseSmester, 'sssssssssssssssssssss');
-
-                            //     });
-
-                            //     courseSmester.forEach(function(semester) {
-                            //         semesterSelect.append(`<option data-id="${semester.id}" value="${semester.id}">${semester.name}</option>`);
-                            //     });
-
-                            //     if (selectedsemesteid) {
-                            //         semesterSelect.vaselectedcourseidl(selectedsemesteid).trigger('change');
-                            //     } else {
-                            //         tableBody.empty();
-
-                            //     }
-                            //     populateStudentdata();
-                            // });
-
-                            // semesterSelect.on('change', function() {
-                            //     selectedsemesteid = $(this).find(':selected').data('id');
-                            //     populateStudentdata();
-                            // });
-
-
-
-
-
-                            // function populateStudentdata() {
-
-                            //     tableBody.empty();
-                            //     if (selectedsemesteid && selectedcourseid) {
-                            //         let = filterfeesdata = feesdata.filter(function(fees) {
-                            //             console.log(fees, '----------------88');
-                            //             return fees.semester_id == selectedsemesteid && fees.course_id == selectedcourseid;
-                            //         });
-                            //     }
-
-
-                            //     if (filterfeesdata.length > 0) {
-                            //         let output = '';
-                            //         filterfeesdata.forEach(function(fees, index) {
-                            //             output += `
-
-                            //        <tr>
-                            //        <td> ${index + 1}</td>
-                            //        <td> ${fees.student.name}</td>
-                            //        <td> ${fees.total_fees ? fees.total_fees : 'N/A'}</td>
-                            //        <td> ${fees.fees_pay ? fees.fees_pay : 'N/A'}</td>
-
-                            //        </tr>`
-                            //         });
-                            //         tableBody.append(output);
-                            //     } else {
-                            //         tableBody.append('<tr><td>No student found for the Selected Semester and Courses.</td></tr>');
-                            //     }
-
-                            // }
-
-
-
-
-
-
                             let selectedSemesterId = null;
                             let selectedCourseId = null;
 
@@ -351,7 +275,7 @@
 
                                 if (selectedSemesterId && selectedCourseId) {
                                     let filteredFeesData = feesdata.filter(function(fee) {
-                                        //console.log(fee, '0000000000000000000000')
+                                       
                                         return fee.semester_id == selectedSemesterId && fee.course_id == selectedCourseId;
                                     });
 
